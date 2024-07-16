@@ -1,0 +1,42 @@
+cluster_name: AWS-Ray-Cluster  # Назва кластеру
+
+max_workers: 5  # Максимальна кількість worker вузлів у кластері
+
+provider:
+    type: aws  # Тип провайдера - AWS
+    region: us-east-2  # Регіон AWS, де буде розгорнуто кластер
+
+available_node_types:  # Визначення типів вузлів, доступних для кластеру
+  ray.head.default:  # Конфігурація для head вузла
+    resources: {"CPU": 2}  # Встановлюємо ресурси CPU на 0 для головного вузла
+    node_config:  # Конфігурація EC2 інстансу для head вузла
+      InstanceType: m5.large  # Тип інстансу AWS EC2 для head вузла
+      ImageId: ami-0aa5328ffcf5d34ac  # ID образу AMI для head вузла
+
+  ray.worker.default:  # Конфігурація для worker вузлів
+    min_workers: 0  # Мінімальна кількість worker вузлів
+    max_workers: 5  # Максимальна кількість worker вузлів
+    resources: {}  # Ресурси, які будуть доступні на worker вузлах (може бути залишено порожнім)
+    node_config:  # Конфігурація EC2 інстансу для worker вузлів
+      InstanceType: m5.2xlarge  # Тип інстансу AWS EC2 для worker вузлів
+      ImageId: ami-0aa5328ffcf5d34ac  # ID образу AMI для worker вузлів
+
+head_node_type: ray.head.default  # Визначення типу вузла для head вузла
+
+setup_commands:  # Команди для встановлення необхідного програмного забезпечення
+  - pip install -U "ray[all]"  # Встановлення Ray з усіма додатковими компонентами
+  - pip install torch torchvision  # Встановлення PyTorch
+  - pip install fastapi  # Встановлення FastAPI
+  - pip install uvicorn  # Встановлення Uvicorn
+  - sudo apt-get update && sudo apt-get install -y wget tar jq  # Встановлення wget, tar, jq
+  - pip install boto3  # Встановлення Boto3
+  - pip install ultralytics # Встановлення ultralytics
+
+head_setup_commands:  # Додаткові команди для head вузла
+  - echo "Head setup complete"
+
+worker_setup_commands:  # Додаткові команди для worker вузлів
+  - echo "Worker setup complete"
+
+initialization_commands:  # Команди, які виконуються після налаштування вузлів, але до запуску Ray
+  - echo "Initialization complete"
