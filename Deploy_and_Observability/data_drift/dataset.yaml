@@ -1,0 +1,14 @@
+# Вказує шлях до папки з датасетом
+path: ./synthetic_dataset_v2
+train: images
+val: images
+
+# Визначає кількість класів об'єктів у датасеті
+nc: 4
+
+# Вказує назви класів, які відповідають індексам у моделі
+names:
+  0: 'circle'
+  1: 'square'
+  2: 'triangle'
+  3: 'pentagon'
