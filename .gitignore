@@ -39,3 +39,12 @@ terraform.rc
 __pycache__
 
 .venv
+runs
+
+.env
+*.env
+
+.cache
+wandb
+
+*.lock.hcl
