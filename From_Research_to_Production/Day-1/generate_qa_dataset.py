@@ -7,7 +7,6 @@ def extract_qa_pairs(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Обновленное регулярное выражение для поддержки обоих форматов
     pattern = r'<summary>(?:<b>)?(?:\s*You typing <code>.*?</code> but )?(.+?)(?:</b>)?</summary><br>(?:<b>\s*|\s*)(.+?)(?:\s*</b>)?\s*</details>'
     matches = re.findall(pattern, content, re.DOTALL)
 
@@ -30,7 +29,7 @@ def save_to_json(data, output_file):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
-    directory = "./temp"  # Текущая директория, измените если нужно
+    directory = "./temp"
     output_file = "devops_qa_dataset.json"
 
     qa_dataset = process_files(directory)

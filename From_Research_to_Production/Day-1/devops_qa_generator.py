@@ -10,7 +10,6 @@ def generate_qa(num_questions):
     qa_pairs = []
 
     for i in range(num_questions):
-        # Generate question
         question_prompt = f"Create a question about DevOps. Question #{i+1}"
         question_response = client.chat.completions.create(
             model="gpt-4",
@@ -19,7 +18,6 @@ def generate_qa(num_questions):
         question = question_response.choices[0].message.content.strip()
         questions.append(question)
 
-        # Generate answer
         answer_prompt = f"Provide a brief answer (up to 10 sentences) to the following DevOps question: {question}"
         answer_response = client.chat.completions.create(
             model="gpt-4",
