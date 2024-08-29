@@ -1,0 +1,16 @@
+type: dev-environment
+# The name is optional, if not specified, generated randomly
+name: vscode
+
+python: "3.11"
+# Uncomment to use a custom Docker image
+#image: dstackai/base:py3.10-0.5-cuda-12.1
+
+# Environment variables
+env:
+  - HUGGING_FACE_HUB_TOKEN
+  - WANDB_API_KEY
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+
+ide: vscode

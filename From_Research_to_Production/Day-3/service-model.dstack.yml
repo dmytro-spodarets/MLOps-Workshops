@@ -1,0 +1,26 @@
+type: service
+
+name: t5-or-phi-model
+
+python: "3.11"
+
+env:
+  - HUGGING_FACE_HUB_TOKEN
+  - WANDB_API_KEY
+commands:
+  - pip install torch transformers datasets wandb tqdm scikit-learn sentencepiece
+  - pip install fastapi uvicorn pydantic
+#  - python download_wandb_model-t5.py
+#  - python t5_api_server.py
+  - pip install vllm
+  - python download-phi-model.py
+  - vllm serve microsoft/Phi-3.5-mini-instruct --dtype=half --gpu-memory-utilization=0.8 --max-model-len 1024 --served-model-name "DevOpsLLM"
+
+port: 8000
+
+auth: false
+
+model:
+  type: chat
+  name: DevOpsLLM
+  format: openai

@@ -1,0 +1,18 @@
+type: fleet
+
+name: mlops-workshop
+
+# Size of the cluster
+nodes: 1
+# Ensure instances are interconnected
+placement: cluster
+
+# Use either spot or on-demand instances
+spot_policy: on-demand
+regions: [us-east-2]
+instance_types: [p3.8xlarge]
+resources:
+  disk: 500GB
+retry:
+  on_events: [no-capacity, interruption, error]
+  duration: 1h

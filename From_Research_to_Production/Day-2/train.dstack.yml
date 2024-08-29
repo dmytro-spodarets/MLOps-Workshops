@@ -1,0 +1,20 @@
+type: task
+
+name: t5-training
+
+python: "3.11"
+
+env:
+  - HUGGING_FACE_HUB_TOKEN
+  - WANDB_API_KEY
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+
+commands:
+  - pip install torch transformers datasets wandb tqdm scikit-learn sentencepiece
+  - pip install "dvc[s3]"
+  - git clone https://github.com/dmytro-spodarets/devops-qa-dataset.git
+  - cd devops-qa-dataset
+  - dvc pull
+  - cd ..
+  - python t5-training.py

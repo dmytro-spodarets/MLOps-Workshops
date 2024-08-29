@@ -1,0 +1,9 @@
+type: gateway
+name: spodarets-com-gateway
+
+# Gateways are bound to a specific backend and region
+backend: aws
+region: us-east-2
+
+# This domain will be used to access the endpoint
+domain: apps.spodarets.com
